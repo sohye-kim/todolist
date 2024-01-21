@@ -1,17 +1,38 @@
+#grid_hz{
+  display: grid;
+  grid-template-columns: 6fr 1fr;
+}
+
 .side {
-  position: absolute;
   background-image: url("C:\Users\김소혜\Documents\SPARTA Cording Club\frontend_React\Assignmnt_Psn\todolist\illust.png");
   background-position: center;
   width: 240px;
   height: 500px;
-  top: 10%;
-  left: 83%;
+  margin-top: 30%;
 }
-.back {
-  background-color: white;
-  border: 5px solid rgb(255, 249, 239);
-  margin: 10px 0 10px 10px;
-  border-radius: 20px;
-  height: 100vh;
-  width: 88vw;
+
+.cards {
+  margin-bottom: 7vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cards > div {
+  margin-bottom: 7vh;
+  margin-left: 10px;
+}
+
+.title {
+  display: inline;
+  margin-bottom: 5px;
+}
+
+Form > Button {
+  display: inline;
+  float: right;
+  margin-bottom: 5px;
+}
+
+.addToDo > Form {
+  margin-left: 10px;
 }
