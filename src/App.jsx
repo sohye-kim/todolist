@@ -21,6 +21,10 @@ function App() {
       id: todos.length + 1, title, date, content, isDone: false
     };
     setTodos([...todos, newTodo]);
+
+    setTitle("");
+    setDate("0000-00-00");
+    setContent("");
   };
 
   const removeButtonHandler = (id, isDone) => {
