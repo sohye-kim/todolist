@@ -5,7 +5,7 @@ import { Card, Form, Button } from 'react-bootstrap';
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false }
+    { id: 1, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "삭제, 추가가 가능한 To Do List 만들기", isDone: false }
   ]);
   const [completedTodos, setCompletedTodos] = useState([]);
   const [title, setTitle] = useState("");
