@@ -1,6 +1,10 @@
 #grid_hz{
   display: grid;
   grid-template-columns: 6fr 1fr;
+
+  min-width: 800px;
+  max-width: 1200px;
+  margin: 0 auto 0 auto;
 }
 
 .side {
@@ -11,15 +15,27 @@
   margin-top: 30%;
 }
 
-.cards {
+.workingCards {
+  margin-left: 10px;
   margin-bottom: 7vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
 
-.cards > div {
-  margin-bottom: 7vh;
+.cards {
+  margin: 10px 10px 10px 10px;
+}
+
+.doneCards {
   margin-left: 10px;
+  margin-bottom: 7vh;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.deleteButton {
+  float: right;
+  display: inline;
 }
 
 .title {
@@ -27,12 +43,27 @@
   margin-bottom: 5px;
 }
 
-Form > Button {
+#grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 76px;  
+}
+
+.todotitle {
   display: inline;
+  max-width: 40vw;
+}
+
+.date {
+  display: inline;
+  max-width: 40vw;
+}
+
+.addButton {
+  max-width: 76px;
   float: right;
-  margin-bottom: 5px;
 }
 
 .addToDo > Form {
   margin-left: 10px;
+  display: inline;
 }
