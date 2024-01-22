@@ -60,8 +60,8 @@ function App() {
                     <Card.Title>{item.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">마감 기한: {item.date}</Card.Subtitle>
                     <Card.Text>{item.content}</Card.Text>
-                    <Button className="deleteButton" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
-                    <Button className="deleteButton" variant="outline-info" onClick={() => toggleDoneHandler(item.id, item.isDone)}>
+                    <Button className="Buttons" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
+                    <Button className="Buttons" variant="outline-info" onClick={() => toggleDoneHandler(item.id, item.isDone)}>
                       {item.isDone ? '취소' : '완료'}
                     </Button>{' '}
                   </Card.Body>
@@ -78,8 +78,8 @@ function App() {
                     <Card.Title>{item.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">마감 기한: {item.date}</Card.Subtitle>
                     <Card.Text>{item.content}</Card.Text>
-                    <Button className="deleteButton" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
-                    <Button className="deleteButton" variant="outline-info" onClick={() => toggleDoneHandler(item.id)}>
+                    <Button className="Buttons" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
+                    <Button className="Buttons" variant="outline-info" onClick={() => toggleDoneHandler(item.id)}>
                       취소
                     </Button>{' '}
                   </Card.Body>
