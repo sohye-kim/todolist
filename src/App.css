@@ -15,15 +15,15 @@
   margin-top: 30%;
 }
 
+.cards {
+  margin: 5px 5px 5px 5px;
+}
+
 .workingCards {
   margin-left: 10px;
   margin-bottom: 7vh;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-}
-
-.cards {
-  margin: 10px 10px 10px 10px;
 }
 
 .doneCards {
