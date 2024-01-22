@@ -1,14 +1,11 @@
-import React, { useState } from 'react'
-import './App.css'
+import React, { useState } from 'react';
+import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Card, Form, Button } from 'react-bootstrap';
 
 function App() {
   const [todos, setTodos] = useState([
-    { id: 1, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false },
-    { id: 2, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false },
-    { id: 3, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false },
-    { id: 4, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false }
+    { id: 1, title: "리액트 입문: 개인 과제", date: "2024-01-23", content: "수정, 삭제, 추가가 가능한 To Do List 만들기", isDone: false }
   ]);
   const [completedTodos, setCompletedTodos] = useState([]);
   const [title, setTitle] = useState("");
@@ -21,23 +18,34 @@ function App() {
 
   const addButtonHandler = () => {
     const newTodo = {
-      id: todos.length + 1, title, date, content
-    }
-    setTodos([...todos, newTodo])
+      id: todos.length + 1, title, date, content, isDone: false
+    };
+    setTodos([...todos, newTodo]);
   };
-  const removeButtonHandler = (id) => {
-    const newTodos = todos.filter(todos => todos.id !== id);
-    setTodos(newTodos);
-  };
-  const checkboxHandler = (id, isDone) => {
-    const targetTodo = todos.filter(todos => todos.id === id);
 
-    if(isDone) {
-      setCompletedTodos([...completedTodos, targetTodo]);
+  const removeButtonHandler = (id, isDone) => {
+    const newTodos = todos.filter(todo => todo.id !== id);
+    setTodos(newTodos);
+
+    if (isDone) {
+      setCompletedTodos(completedTodos.filter(todo => todo.id !== id));
+    }
+  };
+
+  const toggleDoneHandler = (id, isDone) => {
+    const updatedTodos = todos.map(todo =>
+      todo.id === id ? { ...todo, isDone: !todo.isDone } : todo
+    );
+
+    setTodos(updatedTodos);
+
+    const completedTodo = updatedTodos.find(todo => todo.id === id);
+    if (completedTodo && completedTodo.isDone) {
+      setCompletedTodos([...completedTodos, completedTodo]);
     } else {
       setCompletedTodos(completedTodos.filter(todo => todo.id !== id));
     }
-  }
+  };
 
   return (
     <>
@@ -45,45 +53,38 @@ function App() {
         <div>
           <h3>🔥To-do</h3>
           <div className='workingCards'>
-            {todos.map(item => {
-              return (
+            {todos.map(item => (
+              !item.isDone ? (
                 <Card className="cards" key={item.id}>
                   <Card.Body>
                     <Card.Title>{item.title}</Card.Title>
                     <Card.Subtitle className="mb-2 text-muted">마감 기한: {item.date}</Card.Subtitle>
-                    <Card.Text>
-                      {item.content}
-                    </Card.Text>
-                    <Button className="deleteButton" variant="outline-info" onClick={() => removeButtonHandler(item.id)}>삭제</Button>{' '}
-                    <Form>
-                      {['checkbox'].map((type, item) => (
-                        <div key={`default-${type}`} className="mb-3">
-                          <Form.Check type={type} id={`default-${type}`} label={`완료`} checked={item.isDone} onChange={() => checkboxHandler(item.id, item.isDone)} /></div>
-                      ))}
-                    </Form>
+                    <Card.Text>{item.content}</Card.Text>
+                    <Button className="deleteButton" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
+                    <Button className="deleteButton" variant="outline-info" onClick={() => toggleDoneHandler(item.id, item.isDone)}>
+                      {item.isDone ? '취소' : '완료'}
+                    </Button>{' '}
                   </Card.Body>
                 </Card>
-              )
-            })}
+              ) : null
+            ))}
           </div>
           <h3>🎉Done</h3>
           <div className='doneCards'>
             {completedTodos.map(item => (
-              <Card className="cards" key={item.id}>
-                <Card.Body>
-                  <Card.Title>{item.title}</Card.Title>
-                  <Card.Subtitle className="mb-2 text-muted">마감 기한: {item.date}</Card.Subtitle>
-                  <Card.Text>
-                    {item.content}
-                  </Card.Text>
-                  <Form>
-                      {['checkbox'].map((type) => (
-                        <div key={`default-${type}`} className="mb-3">
-                          <Form.Check type={type} id={`default-${type}`} label={`취소`} onChange={() => checkboxHandler(item.id)} /></div>
-                      ))}
-                    </Form>
-                </Card.Body>
-              </Card>
+              item.isDone ? (
+                <Card className="cards" key={item.id}>
+                  <Card.Body>
+                    <Card.Title>{item.title}</Card.Title>
+                    <Card.Subtitle className="mb-2 text-muted">마감 기한: {item.date}</Card.Subtitle>
+                    <Card.Text>{item.content}</Card.Text>
+                    <Button className="deleteButton" variant="outline-info" onClick={() => removeButtonHandler(item.id, item.isDone)}>삭제</Button>{' '}
+                    <Button className="deleteButton" variant="outline-info" onClick={() => toggleDoneHandler(item.id)}>
+                      취소
+                    </Button>{' '}
+                  </Card.Body>
+                </Card>
+              ) : null
             ))}
           </div>
           <div className='addToDo'>
@@ -93,7 +94,7 @@ function App() {
                 <div id='grid'>
                   <Form.Control className='todotitle' type="input" placeholder="제목 ..." value={title} onChange={titleChangeHandler}></Form.Control>
                   <Form.Control className='date' type='date' value={date} onChange={dateChangeHandler} />
-                  <Button className='addButton' variant="info" onClick={addButtonHandler}>Submit</Button>{' '}
+                  <Button className='addButton' variant="info" onClick={addButtonHandler}>추가</Button>{' '}
                 </div>
                 <Form.Control type="input" as="textarea" placeholder="할 일 ..." rows={3} value={content} onChange={contentChangeHandler} />
               </Form.Group>
@@ -103,7 +104,7 @@ function App() {
         <div className='side'></div>
       </div>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
